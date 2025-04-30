@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Veo-Style Landing Page</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+  <style>
+    html, body {
+      height: 100%;
+      margin: 0;
+      font-family: sans-serif;
+      scroll-behavior: smooth;
+    }
+    .swiper {
+      height: 100vh;
+    }
+    video.bg-video {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: -1;
+    }
+  </style>
+</head>
+<body class="bg-black text-white">
+  <!-- Sticky Navbar -->
+  <header class="fixed top-0 w-full bg-black bg-opacity-80 z-50 py-4 px-8 flex justify-between items-center">
+    <h1 class="text-xl font-bold">VeoStyle</h1>
+    <nav>
+      <ul class="flex gap-4 text-sm">
+        <li><a href="#" class="hover:text-green-400">Home</a></li>
+        <li><a href="#" class="hover:text-green-400">Services</a></li>
+        <li><a href="#" class="hover:text-green-400">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- Hero Section with Video Background -->
+  <section class="relative w-full h-screen flex items-center justify-center overflow-hidden pt-16">
+    <video class="bg-video" autoplay muted loop playsinline>
+      <source src="https://cdn.coverr.co/videos/coverr-electric-scooter-ride-3401/1080p.mp4" type="video/mp4">
+    </video>
+    <div class="text-center px-6 z-10">
+      <h1 class="text-4xl md:text-6xl font-bold animate-fade-in">Welcome to VeoStyle</h1>
+      <p class="mt-4 text-xl md:text-2xl animate-fade-in">Modern Mobility for Urban Life</p>
+    </div>
+  </section>
+
+  <!-- Swipe Sections -->
+  <div class="swiper">
+    <div class="swiper-wrapper">
+      <div class="swiper-slide flex flex-col items-center justify-center bg-gray-900 text-center px-6 swipe-animate">
+        <h2 class="text-3xl font-semibold mb-2">Electric Scooters</h2>
+        <img src="https://cdn.pixabay.com/photo/2021/08/12/09/11/electric-scooter-6539562_1280.jpg" alt="Electric Scooter" class="w-64 h-40 object-cover rounded-lg mb-4">
+        <p>Fast, eco-friendly, and fun to ride</p>
+      </div>
+      <div class="swiper-slide flex flex-col items-center justify-center bg-gray-800 text-center px-6 swipe-animate">
+        <h2 class="text-3xl font-semibold mb-2">E-Bikes</h2>
+        <img src="https://cdn.pixabay.com/photo/2020/01/10/16/06/e-bike-4754696_1280.jpg" alt="E-Bike" class="w-64 h-40 object-cover rounded-lg mb-4">
+        <p>Explore your city effortlessly</p>
+      </div>
+      <div class="swiper-slide flex flex-col items-center justify-center bg-gray-700 text-center px-6 swipe-animate">
+        <h2 class="text-3xl font-semibold mb-2">Shared Rides</h2>
+        <img src="https://cdn.pixabay.com/photo/2021/11/21/09/50/electric-bike-6811963_1280.jpg" alt="Shared Ride" class="w-64 h-40 object-cover rounded-lg mb-4">
+        <p>Smart mobility at your fingertips</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Animated Counters -->
+  <section class="bg-black py-16 text-center">
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 px-8">
+      <div class="counter swipe-animate">
+        <p class="text-4xl font-bold text-green-400" id="counter1">0</p>
+        <p class="mt-2">Cities Served</p>
+      </div>
+      <div class="counter swipe-animate">
+        <p class="text-4xl font-bold text-green-400" id="counter2">0</p>
+        <p class="mt-2">Vehicles Deployed</p>
+      </div>
+      <div class="counter swipe-animate">
+        <p class="text-4xl font-bold text-green-400" id="counter3">0</p>
+        <p class="mt-2">Miles Traveled</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="bg-black py-12 text-center swipe-animate">
+    <h2 class="text-4xl font-bold mb-4">Ready to Ride?</h2>
+    <a href="#" class="bg-green-500 hover:bg-green-600 text-white px-6 py-3 rounded-full text-lg">Get the App</a>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-gray-900 py-6 text-center text-gray-400 text-sm swipe-animate">
+    &copy; 2025 VeoStyle. All rights reserved.
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
+  <script>
+    const swiper = new Swiper('.swiper', {
+      direction: 'horizontal',
+      loop: false,
+      pagination: {
+        el: '.swiper-pagination',
+      },
+    });
+
+    // GSAP Fade-in animations
+    gsap.from(".animate-fade-in", {
+      opacity: 0,
+      duration: 1.5,
+      y: 30,
+      stagger: 0.3,
+      ease: "power2.out"
+    });
+
+    // GSAP Scroll animations for swipe-animate elements
+    gsap.utils.toArray(".swipe-animate").forEach(el => {
+      gsap.from(el, {
+        scrollTrigger: {
+          trigger: el,
+          start: "top 80%",
+          toggleActions: "play none none none"
+        },
+        opacity: 0,
+        y: 40,
+        duration: 1,
+        ease: "power2.out"
+      });
+    });
+
+    // Animated Counters
+    function animateCounter(id, endValue) {
+      let obj = document.getElementById(id);
+      let start = 0;
+      let duration = 2000;
+      let startTime = null;
+
+      function step(timestamp) {
+        if (!startTime) startTime = timestamp;
+        const progress = Math.min((timestamp - startTime) / duration, 1);
+        obj.textContent = Math.floor(progress * endValue);
+        if (progress < 1) {
+          requestAnimationFrame(step);
+        }
+      }
+      requestAnimationFrame(step);
+    }
+
+    ScrollTrigger.create({
+      trigger: ".counter",
+      start: "top 80%",
+      once: true,
+      onEnter: () => {
+        animateCounter("counter1", 75);
+        animateCounter("counter2", 1200);
+        animateCounter("counter3", 500000);
+      }
+    });
+  </script>
+</body>
+</html>
